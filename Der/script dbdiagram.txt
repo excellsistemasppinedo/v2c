@@ -1,0 +1,38 @@
+***********************************
+***********************************
+** SCRIPT CREADO EN DBDIAGRAM.IO **
+***********************************
+***********************************
+
+table Encuestas{
+ id_encuesta integer [primary key, increment]
+ titulo varchar          
+ descripcion  varchar  
+ fecha_creacion date
+}
+
+table Preguntas{
+  id_pregunta integer [primary key]
+  id_encuesta integer
+  texto_pregunta varchar
+  tipo integer
+}
+
+table Opciones{
+  id_opcion integer [primary key]
+  id_pregunta integer
+  texto varchar
+}
+
+table Respuestas{
+  id_respuesta integer [primary key]
+  id_pregunta integer 
+  id_opcion integer
+  respuesta_texto varchar
+  fecha_respuesta date
+}
+
+ref encuestas_preguntas : Encuestas.id_encuesta > Preguntas.id_encuesta
+ref preguntas_opciones : Preguntas.id_pregunta > Opciones.id_pregunta
+ref preguntas_respuestas : Preguntas.id_pregunta > Respuestas.id_pregunta
+ref opciones_respuestas : Opciones.id_opcion > Respuestas.id_opcion
